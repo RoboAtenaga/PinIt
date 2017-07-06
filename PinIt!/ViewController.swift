@@ -24,6 +24,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         boards.append("Roe")
         boards.append("Roe")
         boards.append("Roe")
+        boards.append("Roe")
+        boards.append("Roe")
+        boards.append("Roe")
+        boards.append("Roe")
+        boards.append("Roe")
         
         boardsCollectionView.delegate = self
         boardsCollectionView.dataSource = self
