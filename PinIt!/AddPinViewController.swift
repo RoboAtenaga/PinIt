@@ -11,14 +11,29 @@ import  CoreData
 
 // To use UIImagePickerController, you need to implement UIImagePickerControllerDelegate, UINavigationControllerDelegate
 class AddPinViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     @IBOutlet weak var pinImageView: UIImageView!
     @IBOutlet weak var txtName: UITextField!
+    @IBOutlet weak var btnPinUpdate: UIButton!
+    
+    @IBOutlet weak var btnDelete: UIButton!
+    var pin: Pin? = nil
     var boardName = ""
     var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        
+        if pin != nil{
+            txtName.text = pin!.name!
+            pinImageView.image = UIImage(data: pin!.image! as Data)
+            
+            btnPinUpdate.setTitle("Edit", for: .normal)
+        }
+        else{
+            btnDelete.isHidden = true
+        }
         
         // Making UIImageView Clickable
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped(tapGestureRecognizer:)))
@@ -31,22 +46,33 @@ class AddPinViewController: UIViewController, UIImagePickerControllerDelegate, U
         present(imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func pinTapped(_ sender: Any) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let pin = Pin(context: context)
+    @IBAction func pinUpdateTapped(_ sender: Any) {
+        if pin != nil{
+            pin!.name = txtName.text!
+            pin!.image = UIImagePNGRepresentation(pinImageView.image!) as NSData?
+        }
+        else{
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let pin2 = Pin(context: context)
+            
+            pin2.setValue(txtName.text!, forKey: "name")
+            pin2.setValue(UIImagePNGRepresentation(pinImageView.image!) as NSData?, forKey: "image")
+            pin2.setValue(boardName, forKey: "boardName")
+        }
         
-        pin.setValue(txtName.text!, forKey: "name")
-        pin.setValue(UIImagePNGRepresentation(pinImageView.image!) as NSData?, forKey: "image")
-        pin.setValue(boardName, forKey: "boardName")
-        
-        //or
-        //pin.name = txtName.text!
-        //pin.image = UIImagePNGRepresentation(pinImageView.image!) as NSData?
         // Saving to CoreData
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         // Automatically go back to previousVC after adding
         navigationController!.popViewController(animated: true)
         
+    }
+    
+    @IBAction func deleteTapped(_ sender: Any) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        context.delete(pin!)
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        // Automatically go back to previousVC after adding
+        navigationController!.popViewController(animated: true)
     }
     
     func imageViewTapped(tapGestureRecognizer: UITapGestureRecognizer)

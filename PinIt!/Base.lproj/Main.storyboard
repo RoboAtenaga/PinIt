@@ -168,13 +168,12 @@
                     <navigationItem key="navigationItem" title="Board Name" id="Dhw-ST-Hk3">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="2NA-Ab-bne">
                             <connections>
-                                <segue destination="vUs-Pa-0Z5" kind="show" identifier="newPin" id="BxC-4k-JfI"/>
+                                <segue destination="vUs-Pa-0Z5" kind="show" identifier="pinSegue" id="BxC-4k-JfI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tblPins" destination="kwj-Bw-1E1" id="ak0-yG-eJg"/>
-                        <segue destination="aU2-ZT-To3" kind="show" identifier="pinDetail" id="zv2-RH-G1U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hlR-i7-zmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -196,6 +195,14 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01" translatesAutoresizingMaskIntoConstraints="NO" id="3b8-03-5oc">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTU-qE-MxP">
+                                <rect key="frame" x="62" y="278" width="60" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteTapped:" destination="vUs-Pa-0Z5" eventType="touchUpInside" id="tZ6-EI-gLS"/>
+                                </connections>
+                            </button>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photosIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Vl2-z2-h8p">
                                 <rect key="frame" x="47" y="84" width="280" height="150"/>
                                 <constraints>
@@ -210,11 +217,11 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t3V-Yn-PcB">
-                                <rect key="frame" x="172" y="278" width="30" height="36"/>
+                                <rect key="frame" x="290" y="278" width="30" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <state key="normal" title="Pin"/>
                                 <connections>
-                                    <action selector="pinTapped:" destination="vUs-Pa-0Z5" eventType="touchUpInside" id="XUY-Nm-zZL"/>
+                                    <action selector="pinUpdateTapped:" destination="vUs-Pa-0Z5" eventType="touchUpInside" id="JNT-15-xs7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -223,12 +230,14 @@
                             <constraint firstAttribute="trailing" secondItem="3b8-03-5oc" secondAttribute="trailing" id="4K3-g0-Sxl"/>
                             <constraint firstItem="wj0-eN-eCG" firstAttribute="width" secondItem="Vl2-z2-h8p" secondAttribute="width" id="7vV-hg-UIf"/>
                             <constraint firstItem="3b8-03-5oc" firstAttribute="leading" secondItem="aal-75-agB" secondAttribute="leading" id="Cpa-Rf-x8J"/>
-                            <constraint firstItem="t3V-Yn-PcB" firstAttribute="top" secondItem="wj0-eN-eCG" secondAttribute="bottom" constant="5" id="H6C-LW-2vo"/>
                             <constraint firstItem="Vl2-z2-h8p" firstAttribute="top" secondItem="YwM-hJ-XM9" secondAttribute="bottom" constant="20" id="KaI-Sj-EKE"/>
                             <constraint firstItem="wj0-eN-eCG" firstAttribute="centerX" secondItem="Vl2-z2-h8p" secondAttribute="centerX" id="MBy-zp-e1g"/>
                             <constraint firstItem="3b8-03-5oc" firstAttribute="top" secondItem="YwM-hJ-XM9" secondAttribute="bottom" id="Rld-be-DgC"/>
-                            <constraint firstItem="t3V-Yn-PcB" firstAttribute="centerX" secondItem="aal-75-agB" secondAttribute="centerX" id="T7U-km-gBU"/>
+                            <constraint firstItem="eTU-qE-MxP" firstAttribute="leading" secondItem="aal-75-agB" secondAttribute="leadingMargin" constant="46" id="TKf-f8-k01"/>
+                            <constraint firstItem="eTU-qE-MxP" firstAttribute="baseline" secondItem="t3V-Yn-PcB" secondAttribute="baseline" id="Xdz-Eo-nJi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="t3V-Yn-PcB" secondAttribute="trailing" constant="39" id="dDM-Wa-21E"/>
                             <constraint firstItem="wj0-eN-eCG" firstAttribute="top" secondItem="Vl2-z2-h8p" secondAttribute="bottom" constant="10" id="iJE-41-eMK"/>
+                            <constraint firstItem="eTU-qE-MxP" firstAttribute="top" secondItem="wj0-eN-eCG" secondAttribute="bottom" constant="5" id="kRp-P2-hc4"/>
                             <constraint firstItem="Vl2-z2-h8p" firstAttribute="centerX" secondItem="aal-75-agB" secondAttribute="centerX" id="pRE-Jk-g3o"/>
                             <constraint firstItem="JQl-ma-aeb" firstAttribute="top" secondItem="3b8-03-5oc" secondAttribute="bottom" id="y7o-6n-UgY"/>
                         </constraints>
@@ -241,6 +250,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnDelete" destination="eTU-qE-MxP" id="SCk-kg-Bgu"/>
+                        <outlet property="btnPinUpdate" destination="t3V-Yn-PcB" id="aaB-kd-Cut"/>
                         <outlet property="pinImageView" destination="Vl2-z2-h8p" id="Mtq-hR-D2F"/>
                         <outlet property="txtName" destination="wj0-eN-eCG" id="CVW-1K-M8B"/>
                     </connections>
@@ -248,84 +259,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CiC-au-45W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2333.5999999999999" y="792.95352323838085"/>
-        </scene>
-        <!--Edit Pin-->
-        <scene sceneID="640-l7-gVE">
-            <objects>
-                <viewController id="aU2-ZT-To3" customClass="EditPinViewController" customModule="PinIt_" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="KVV-5Y-Iva"/>
-                        <viewControllerLayoutGuide type="bottom" id="IJP-YM-ddE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KGB-jT-CGh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01" translatesAutoresizingMaskIntoConstraints="NO" id="FNa-dl-yG8">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zna-in-Tky">
-                                <rect key="frame" x="67" y="322" width="60" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="bC2-dI-74c"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <state key="normal" title="Delete"/>
-                                <connections>
-                                    <action selector="deleteTapped:" destination="aU2-ZT-To3" eventType="touchUpInside" id="gPH-0g-DP5"/>
-                                </connections>
-                            </button>
-                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photosIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2Z0-A1-bcP">
-                                <rect key="frame" x="47.5" y="128" width="280" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="52M-RS-t7T"/>
-                                    <constraint firstAttribute="height" constant="150" id="9Hg-Sb-smJ"/>
-                                </constraints>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hq4-S3-LRs">
-                                <rect key="frame" x="47.5" y="288" width="280" height="29"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fM-St-SZ7">
-                                <rect key="frame" x="255" y="322" width="60" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="NzB-qh-pnZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <state key="normal" title="Edit"/>
-                                <connections>
-                                    <action selector="saveTapped:" destination="aU2-ZT-To3" eventType="touchUpInside" id="a7s-hM-HXu"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="hq4-S3-LRs" firstAttribute="centerX" secondItem="2fM-St-SZ7" secondAttribute="centerX" constant="-97.5" id="1IE-0y-lIR"/>
-                            <constraint firstItem="zna-in-Tky" firstAttribute="centerY" secondItem="FNa-dl-yG8" secondAttribute="centerY" constant="-47.5" id="Cxh-P4-Yc9"/>
-                            <constraint firstItem="2fM-St-SZ7" firstAttribute="top" secondItem="hq4-S3-LRs" secondAttribute="bottom" constant="5" id="OvT-r7-GUb"/>
-                            <constraint firstItem="FNa-dl-yG8" firstAttribute="bottom" secondItem="IJP-YM-ddE" secondAttribute="top" id="Rbb-9G-9FX"/>
-                            <constraint firstItem="hq4-S3-LRs" firstAttribute="centerX" secondItem="2Z0-A1-bcP" secondAttribute="centerX" id="S1w-kM-3Io"/>
-                            <constraint firstAttribute="trailing" secondItem="FNa-dl-yG8" secondAttribute="trailing" id="XXV-mm-Qwk"/>
-                            <constraint firstItem="FNa-dl-yG8" firstAttribute="centerX" secondItem="2fM-St-SZ7" secondAttribute="centerX" constant="-97.5" id="Xjw-6g-CBD"/>
-                            <constraint firstItem="FNa-dl-yG8" firstAttribute="leading" secondItem="KGB-jT-CGh" secondAttribute="leading" id="ZLU-zz-fRV"/>
-                            <constraint firstItem="zna-in-Tky" firstAttribute="leading" secondItem="2fM-St-SZ7" secondAttribute="leading" constant="-188" id="fYN-mQ-npr"/>
-                            <constraint firstItem="FNa-dl-yG8" firstAttribute="top" secondItem="KVV-5Y-Iva" secondAttribute="bottom" constant="44" id="qvq-tY-ju2"/>
-                            <constraint firstItem="hq4-S3-LRs" firstAttribute="top" secondItem="2Z0-A1-bcP" secondAttribute="bottom" constant="10" id="uGe-jc-Ia6"/>
-                            <constraint firstItem="2Z0-A1-bcP" firstAttribute="top" secondItem="KVV-5Y-Iva" secondAttribute="bottom" constant="64" id="unJ-q1-nUj"/>
-                            <constraint firstItem="hq4-S3-LRs" firstAttribute="width" secondItem="2Z0-A1-bcP" secondAttribute="width" id="y5V-tG-gO8"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Edit Pin" id="RE4-Dg-8Yy"/>
-                    <connections>
-                        <outlet property="imageView" destination="2Z0-A1-bcP" id="lSG-2a-Iji"/>
-                        <outlet property="txtName" destination="hq4-S3-LRs" id="Sv1-bG-gGb"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mZK-gb-qDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1574" y="1561"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Iyv-VH-qiP">

@@ -46,19 +46,14 @@ class BoardDetailViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let pin = pins[indexPath.row]
-        performSegue(withIdentifier: "pinDetail", sender: pin)
+        performSegue(withIdentifier: "pinSegue", sender: pin)
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "pinDetail"{
-            let editPinVC = segue.destination as! EditPinViewController
+            let editPinVC = segue.destination as! AddPinViewController
             editPinVC.pin = sender as? Pin
-        }
-        else{
-            let addPinVC = segue.destination as! AddPinViewController
-            addPinVC.boardName = boardName
-        }
+            editPinVC.boardName = boardName
     }
     
     func getPinsFromCoreData() {

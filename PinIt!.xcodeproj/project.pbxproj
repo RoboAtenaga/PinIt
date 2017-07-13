@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5C07CF6A1F162C1D00E55FB1 /* BoardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07CF691F162C1D00E55FB1 /* BoardDetailViewController.swift */; };
-		5C07CF6C1F162C2E00E55FB1 /* EditPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07CF6B1F162C2E00E55FB1 /* EditPinViewController.swift */; };
 		5C07CF6E1F16340500E55FB1 /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07CF6D1F16340500E55FB1 /* BoardCollectionViewCell.swift */; };
 		5C07CF721F17279500E55FB1 /* PinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07CF711F17279500E55FB1 /* PinTableViewCell.swift */; };
 		5C8DA8711F0DDED6009D2B3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8DA8701F0DDED6009D2B3B /* AppDelegate.swift */; };
@@ -41,7 +40,6 @@
 
 /* Begin PBXFileReference section */
 		5C07CF691F162C1D00E55FB1 /* BoardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardDetailViewController.swift; sourceTree = "<group>"; };
-		5C07CF6B1F162C2E00E55FB1 /* EditPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPinViewController.swift; sourceTree = "<group>"; };
 		5C07CF6D1F16340500E55FB1 /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C07CF711F17279500E55FB1 /* PinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinTableViewCell.swift; sourceTree = "<group>"; };
 		5C8DA86D1F0DDED6009D2B3B /* PinIt!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PinIt!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,7 +113,6 @@
 				5C8DA8721F0DDED6009D2B3B /* BoardsViewController.swift */,
 				5C07CF691F162C1D00E55FB1 /* BoardDetailViewController.swift */,
 				5CBE9EFF1F14D8A4008CEC36 /* AddPinViewController.swift */,
-				5C07CF6B1F162C2E00E55FB1 /* EditPinViewController.swift */,
 				5C8DA8741F0DDED6009D2B3B /* Main.storyboard */,
 				5C8DA87A1F0DDED6009D2B3B /* Assets.xcassets */,
 				5C8DA87C1F0DDED6009D2B3B /* LaunchScreen.storyboard */,
@@ -284,7 +281,6 @@
 				5CBE9F001F14D8A4008CEC36 /* AddPinViewController.swift in Sources */,
 				5C07CF6A1F162C1D00E55FB1 /* BoardDetailViewController.swift in Sources */,
 				5C07CF721F17279500E55FB1 /* PinTableViewCell.swift in Sources */,
-				5C07CF6C1F162C2E00E55FB1 /* EditPinViewController.swift in Sources */,
 				5C8DA8731F0DDED6009D2B3B /* BoardsViewController.swift in Sources */,
 				5C8DA8791F0DDED6009D2B3B /* PinIt_.xcdatamodeld in Sources */,
 				5C8DA8711F0DDED6009D2B3B /* AppDelegate.swift in Sources */,
